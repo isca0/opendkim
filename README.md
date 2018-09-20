@@ -57,7 +57,7 @@ The full list of environments is:
   as opendkim keys folder and specify the `keyfile=/etc/opendkim/keys/mypk.key`. And `myfolder`  
   must also be owned by id `0`.
   ```
-  $ docker run -p 8891:8891 -v ${PWD}/myfolder:/etc/opendkim/keys -e keyfile="/etc/opendkim/keys/mypk.key` -e mydomain.com isca0/opendkim
+  $ docker run -p 8891:8891 -v ${PWD}/myfolder:/etc/opendkim/keys -e keyfile="/etc/opendkim/keys/mypk.key" -e mydomain.com isca0/opendkim
   ```
     
   * inthosts: 192.168.0.0/24 10.0.0.2   
