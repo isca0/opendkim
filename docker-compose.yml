@@ -1,0 +1,19 @@
+---
+# Run Opendkim
+version: '3.3'
+services:
+  milter:
+    container_name: opendkim
+    build: ./
+    ports:
+      - 8891:8891
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - dkim:/etc/opendkim/keys
+    environment:
+      domain: "mydomain.com"
+      inthosts: "127.0.0.1/8 192.168.0.0/24"
+volumes:
+  dkim:
+    external: true
+
