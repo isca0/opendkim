@@ -45,6 +45,8 @@ conf_dkim(){
          -e "s,SELECTOR,${selectorset}," \
          -e "s,^KeyFile.*\$,KeyFile\t\t\t${keyfileset}," "$odkconf"
   echo -e "InternalHosts\t\t$hostsset" >> "$odkconf"
+  chown -R 100:101 "/run/opendkim"
+  chown -R 100:101 "$odk"/keys
   cat "$odkconf"
 
 }
@@ -56,7 +58,7 @@ start(){
   fi
   socat UNIX-RECV:/dev/log,mode=666 STDOUT &
   conf_dkim
-  exec opendkim -vfx "$odkconf"
+  exec su -s /bin/sh -c "opendkim -vfx $odkconf" opendkim
 }
 
 start
