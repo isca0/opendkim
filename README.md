@@ -30,7 +30,7 @@ $ docker run -p 8891:8891 -v ${PWD}/mykeysfolder:/etc/opendkim/keys -e domain="m
 ```
 This way the local folder `mykeyfoler` will be mounted as opendkim `keys` folder, this folder  
 must contain a valid opendkim private key, in this example called `myprivatekey.private`.  
-If you are running for the first time and don't specify any private key, than this container  
+If you are running for the first time and don't specify any private key, then this container  
 will generate one for you, and display on stdout. It will also generate the key on the specified  
 volume directory.  
 You must keep in mind the opendkim is running as opendkim user inside the container, and if you  
@@ -41,7 +41,7 @@ the permissions setted to `u=rw,g=r` a.k.a `640`.
 Running with internal specified hosts:  
   
 ```
-$ docker run -p 8891:8891 -v ${PWD}/mykeysfolder:/etc/opendkim/keys -e selector="mydomain" -e domain="mydomain.com" -e "myprivatekey.private" -e inthosts="192.168.0.0/24 10.0.0.0/8" isca/opendkim  
+$ docker run -p 8891:8891 -v ${PWD}/mykeysfolder:/etc/opendkim/keys -e selector="mydomain" -e domain="mydomain.com" -e "myprivatekey.private" -e inthosts="192.168.0.0/24, 10.0.0.0/8" isca/opendkim  
 ```
 This way is the most custom way to run this container, here you are specifing a list of internal hosts  
 wich can communicate with opendkim. By default this environment is `0.0.0.0/0`, but in most cases you'll  
@@ -66,11 +66,11 @@ The full list of environments is:
   By the way, when the container start `myfolder` will be owned by uid `100`.  
   
   ```
-  $ docker run -p 8891:8891 -v ${PWD}/myfolder:/etc/opendkim/keys -e selector="mydomain" -e domain="mydomain.com" -e keyfile="/etc/opendkim/keys/mypk.key" -e mydomain.com isca/opendkim
+  $ docker run -p 8891:8891 -v ${PWD}/myfolder:/etc/opendkim/keys -e keyfile="/etc/opendkim/keys/mypk.key" -e mydomain.com isca/opendkim
   ```
   
-  * inthosts: 192.168.0.0/24 10.0.0.2  
-  Specify your internal hosts separated with spaces and protect with double quotes `"`.  
+  * inthosts: 192.168.0.0/24, 10.0.0.2  
+  Specify your internal hosts separated with comma `,` and protect with double quotes `"`.  
   
 #### License  
 GPL-v3  
