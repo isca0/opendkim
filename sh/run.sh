@@ -47,6 +47,7 @@ conf_dkim(){
   echo -e "InternalHosts\t\t$hostsset" >> "$odkconf"
   chown -R 100:101 "/run/opendkim"
   chown -R 100:101 "$odk"/keys
+  find "$odk"/keys -type f -exec chmod 640 {} \;
   cat "$odkconf"
 
 }
